@@ -22,26 +22,30 @@ app.use(
   })
 );
 
+app.use(express.json());
+
+const cheeses = [
+  'Bath Blue',
+  'Barkham Blue',
+  'Buxton Blue',
+  'Cheshire Blue',
+  'Devon Blue',
+  'Dorset Blue Vinney',
+  'Dovedale',
+  'Exmoor Blue',
+  'Harbourne Blue',
+  'Lanark Blue',
+  'Lymeswold',
+  'Oxford Blue',
+  'Shropshire Blue',
+  'Stichelton',
+  'Stilton',
+  'Blue Wensleydale',
+  'Yorkshire Blue'
+];
+
 app.get('/api/cheeses', (req, res, next) => {
-  const cheeses = [
-    'Bath Blue',
-    'Barkham Blue',
-    'Buxton Blue',
-    'Cheshire Blue',
-    'Devon Blue',
-    'Dorset Blue Vinney',
-    'Dovedale',
-    'Exmoor Blue',
-    'Harbourne Blue',
-    'Lanark Blue',
-    'Lymeswold',
-    'Oxford Blue',
-    'Shropshire Blue',
-    'Stichelton',
-    'Stilton',
-    'Blue Wensleydale',
-    'Yorkshire Blue'
-  ];
+
   // const cheeseJSON = cheeses.map(cheese => {
   //   return {type: cheese};
   // });
@@ -49,6 +53,15 @@ app.get('/api/cheeses', (req, res, next) => {
   return res.json(cheeses);
 
 });
+
+app.post('/api/cheeses', (req, res, next) => {
+  
+  cheeses.push(req.body.cheese.addCheese);
+  console.log(cheeses);
+  return res.json(cheeses);
+});
+
+
 
 function runServer(port = PORT) {
   const server = app
